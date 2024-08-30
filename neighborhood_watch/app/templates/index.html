@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Neighborhood Watch Alerts</title>
+</head>
+<body>
+    <h1>Real-Time Alerts</h1>
+    <div id="alerts"></div>
+
+    <input id="alertInput" type="text" placeholder="Type your alert here">
+    <button onclick="sendAlert()">Send Alert</button>
+
+    <script>
+        const alertsDiv = document.getElementById('alerts');
+        const alertInput = document.getElementById('alertInput');
+        // const ws = new WebSocket(
+        //     'ws://'
+        //     + window.location.host
+        //     + '/ws/alerts/'
+        // );
+        const ws = new WebSocket('ws://' + window.location.host + '/ws/alerts/');
+    
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            alertsDiv.innerHTML += '<p>' + data.message + '</p>';
+        };
+
+        function sendAlert() {
+            const message = alertInput.value;
+            ws.send(JSON.stringify({'message': message}));
+            alertInput.value = '';
+        }
+    </script>
+</body>
+</html>
+

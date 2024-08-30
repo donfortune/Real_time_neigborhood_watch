@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'add_alert' %}">
+    {% csrf_token %}
+    <textarea name="message" required></textarea>
+    <button type="submit">Add Alert</button>
+</form>

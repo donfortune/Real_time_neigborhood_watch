@@ -1,0 +1,6 @@
+<!-- alerts.html -->
+<ul>
+    {% for alert in alerts %}
+        <li>{{ alert.timestamp }} - {{ alert.user.username }}: {{ alert.message }}</li>
+    {% endfor %}
+</ul>
